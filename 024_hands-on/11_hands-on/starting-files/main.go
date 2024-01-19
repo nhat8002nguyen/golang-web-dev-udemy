@@ -1,12 +1,22 @@
 package main
 
 import (
+	"html/template"
 	"log"
 	"net/http"
 )
 
-func main() {
+var tpl *template.Template
 
+func init() {
+	tpl = template.Must(template.ParseGlob("templates/*.gohtml"))
+}
+
+func main() {
+	http.HandleFunc("/", index)
+	http.HandleFunc("/about", about)
+	http.HandleFunc("/contact", contact)
+	http.HandleFunc("/apply", apply)
 	http.ListenAndServe(":8080", nil)
 }
 
