@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 )
 
@@ -31,7 +30,7 @@ func foo(w http.ResponseWriter, req *http.Request) {
 		fmt.Println("\nfile:", f, "\nheader:", h, "\nerr", err)
 
 		// read
-		bs, err := ioutil.ReadAll(f)
+		bs, err := io.ReadAll(f)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
